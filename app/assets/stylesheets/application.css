@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+ .form-control-1{
+ 	font-size: initial;
+ 	float:left;
+ 	margin-left: 20%
+ }
+
+ .form-control-2{
+ 	float: left;
+ 	width: 20px;
+ }
+
+ .form-control-3{
+ 	clear: both;
+ 	float: left;
+ 	/*color: red;*/
+ 	display: block;
+ 	/*border: 1px solid black*/
+ }
