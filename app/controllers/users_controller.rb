@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+	before_action :check_logged_in, only: [:new]
 	def show
 		@user = User.find_by(id:params[:id])
 		if @user.nil?
@@ -24,6 +24,14 @@ class UsersController < ApplicationController
 	end
 
 	private
+
+	def check_logged_in
+		if logged_in?
+			flash[:danger] = "You are logging..."
+			redirect_to root_path
+		end
+		
+	end
 
 	def user_params
 		params.require(:user).permit(:name, :email, :password,
