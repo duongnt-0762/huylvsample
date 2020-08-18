@@ -12,7 +12,23 @@
 			<%= f.label :email %>
 			<%= f.email_field :email, class: 'form-control' %>
 
-			<%= f.label :password %>
+			<%= f.label :date_of_birth %>
+			<%= f.date_field :date_of_birth, class: 'form-control' %>
+
+			<%= f.label :que_quan %>
+			<%= f.text_field :que_quan, class: 'form-control' %>
+			
+		    <%= f.label :gioi_tinh, 'Man', :value => '1', class: 'form-control-1'%>
+			<%= f.radio_button :gioi_tinh, '1', class: 'form-control-2'  %> 
+
+		  	<%= f.label :gioi_tinh, 'Woman', :value => '2',class: 'form-control-1' %>
+		 	<%= f.radio_button :gioi_tinh, '2', class: 'form-control-2' %>
+
+		 	<%= f.label :gioi_tinh, 'N/A', :value => '0',class: 'form-control-1' %>
+		 	<%= f.radio_button :gioi_tinh, '0', class: 'form-control-2' %>
+
+
+			<%= f.label :password , class: 'form-control-3'%>
 			<%= f.password_field :password, class: 'form-control' %>
 
 			<%= f.label :password_confirmation, "Confirmation" %>
