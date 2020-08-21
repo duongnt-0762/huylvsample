@@ -6,12 +6,12 @@ class User < ApplicationRecord
 					  format: { with: VALID_EMAIL_REGEX },
 					  uniqueness: true
 	has_secure_password
-	validates :password, presence: true, length: { minimum: 6 }
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 	validates :date_of_birth, presence: true
 	validate :check_DOB
 
 	class << self
-	# Returns the hash digest of the given string.
+		# Returns the hash digest of the given string.
 		def digest(string)
 			cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
 													      BCrypt::Engine.cost
@@ -41,6 +41,11 @@ class User < ApplicationRecord
 		update_attributes remember_digest: nil
 	end
 
+	# Returns true if the given user is the current user.
+	def current_user?(user)
+		user && user == self
+	end
+
 	private
 
 	def downcase_email
@@ -52,4 +57,5 @@ class User < ApplicationRecord
 			errors.add(:date_of_birth, "Error!!!")
 		end	
 	end
+	
 end

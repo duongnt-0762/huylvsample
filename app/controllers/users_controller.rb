@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-	before_action :check_logged_in, only: [:new]
-	def show
-		@user = User.find_by(id:params[:id])
-		if @user.nil?
-			flash[:danger] = "User khong ton tai!!!"
-			redirect_to root_path
-		end
+	before_action :logged_in_user, only: [:new, :index]
+	before_action :find_user, only: [:correct_user, :show, :edit, :update, :destroy]
+	before_action :correct_user, only: [:edit, :update]
+	before_action :admin_user, only: :destroy
+	
+	def index
+		@users = User.paginate(page: params[:page])
 	end
 
 	def new
@@ -23,13 +23,47 @@ class UsersController < ApplicationController
 		end
 	end
 
-	private
+	def show
+	end
 
-	def check_logged_in
-		if logged_in?
+	def edit
+	end
+
+	def update
+		if @user.update(user_params)
+			flash[:success] = "Profile updated"
+			redirect_to @user
+		else
+			render :edit
+		end		
+	end
+
+	def destroy
+		@user.destroy
+		flash[:success] = "User deleted"
+		redirect_to users_url
+	end
+
+	private
+	# Confirms a logged-in user.
+	def logged_in_user
+		unless logged_in?
+			store_location
+			flash[:danger] = "Please log in!!!"
+			redirect_to login_url
+		else logged_in?
 			flash[:danger] = "You are logging..."
 			redirect_to root_path
+					
 		end	
+	end
+
+	# Confirms the correct user.
+	def correct_user
+		 if  !current_user.current_user?(@user)
+		 	flash[:danger] = "Cannot edit other users!!!"
+		 	redirect_to @user
+		 end	
 	end
 
 	def user_params
@@ -41,5 +75,19 @@ class UsersController < ApplicationController
 									)
 	end
 
+	# Confirms an admin user.
+	def admin_user
+		redirect_to(root_url) unless current_user.admin?
+		
+	end
 
+	def find_user
+		@user = User.find_by(id:params[:id])
+		if @user.nil?
+			flash[:danger] = "User không tồn tại!!!"
+			redirect_to root_path
+		end
+	end
+
+	
 end
