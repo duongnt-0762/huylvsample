@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :logged_in_user, only: [:new, :index]
+	before_action :logged_in_user, only: [:new]
+	before_action :check_logged_in, only: [:new, :create]
 	before_action :find_user, only: [:correct_user, :show, :edit, :update, :destroy]
 	before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: :destroy
@@ -23,7 +24,8 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def show
+	def show 
+		@microposts = @user.microposts.order_by_time.paginate(page: params[:page])
 	end
 
 	def edit
@@ -44,18 +46,25 @@ class UsersController < ApplicationController
 		redirect_to users_url
 	end
 
-	private
 	# Confirms a logged-in user.
+	
+
+
+	private
+
 	def logged_in_user
 		unless logged_in?
 			store_location
 			flash[:danger] = "Please log in!!!"
-			redirect_to login_url
-		else logged_in?
+			redirect_to login_url		
+		end
+	end
+
+	def check_logged_in
+		if logged_in?
 			flash[:danger] = "You are logging..."
 			redirect_to root_path
-					
-		end	
+		end		
 	end
 
 	# Confirms the correct user.

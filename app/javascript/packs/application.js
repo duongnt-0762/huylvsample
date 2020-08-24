@@ -17,3 +17,12 @@ import "bootstrap"
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+//Checking the file size with jQuery.
+	$("#micropost_image").bind("change", function() {
+		var size_in_megabytes = this.files[0].size/1024/1024;
+		if (size_in_megabytes > 5) {
+			alert("Maximum file size is 5MB. Please choose a smaller file.");
+		}
+	});
+
