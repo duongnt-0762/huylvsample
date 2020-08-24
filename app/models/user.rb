@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+	has_many :microposts, dependent: :destroy 
 	attr_accessor :remember_token
 	before_save :downcase_email
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -44,6 +45,11 @@ class User < ApplicationRecord
 	# Returns true if the given user is the current user.
 	def current_user?(user)
 		user && user == self
+	end
+
+	# See "Following users" for the full implementation.
+	def feed
+		self.microposts
 	end
 
 	private
