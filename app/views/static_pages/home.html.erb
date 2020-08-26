@@ -1,17 +1,18 @@
-<p class="test">Các bạn đang nghe nhạc tại trang web Locahost:3000 </p>
-<div class="hihi">
-	<% if logged_in? %>
-		<div id="ma_que">
-			<marquee scrollamount="30" scrolldelay="200" style="height: 50px; width: 860px;">
-			<p >chúc các bạn nghe nhạc vui vẻ</p></marquee>
-		</div>	
-		<iframe width="866" height="500" src="https://www.youtube.com/embed/videoseries?list=PL3bYWEkv_0paaKLJFYYHs2-QJ8zFzldsi&autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		
-		<iframe src="https://translate.google.com/translate_tts?ie=UTF-8&q=C%C3%A1c%20b%E1%BA%A1n%20%C4%91ang%20nghe%20nh%E1%BA%A1c%20t%E1%BA%A1i%20website%20l%C3%A2u%20c%E1%BB%9D%20h%C3%B3t%20ch%E1%BA%A5m%20ba%20ngh%C3%ACn%20ch%C3%BAc%20c%C3%A1c%20b%E1%BA%A1n%20nghe%20nh%E1%BA%A1c%20vui%20v%E1%BA%BB&tl=vi&total=1&idx=0&textlen=89&tk=540951.951527&client=webapp&prev=input" allow="autoplay" style="display:none" id="iframeAudio">
-		</iframe>		
-	<% else %>
-		<h1 class="welcome">Welcome to the Sample App</h1> 
-		<p style="margin-left: 355px"><%= link_to "Sign up now!", signup_path, class: "button" %></p>
-	<% end %>
-
-</div>
+<body style="background-image: url('https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg');">
+	<p class="test">Các bạn đang nghe nhạc tại trang web Locahost:3000 </p>
+	<div class="hihi">
+		<% if logged_in? %>
+			<div id="ma_que">
+				<marquee scrollamount="30" scrolldelay="200" style="height: 50px; width: 860px;">
+				<p >chúc các bạn nghe nhạc vui vẻ</p></marquee>
+			</div>	
+			<iframe width="866" height="500" src="https://www.youtube.com/embed/videoseries?list=PL3bYWEkv_0paaKLJFYYHs2-QJ8zFzldsi&autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			
+			<iframe src="https://translate.google.com/translate_tts?ie=UTF-8&q=C%C3%A1c%20b%E1%BA%A1n%20%C4%91ang%20nghe%20nh%E1%BA%A1c%20t%E1%BA%A1i%20website%20l%C3%A2u%20c%E1%BB%9D%20h%C3%B3t%20ch%E1%BA%A5m%20ba%20ngh%C3%ACn%20ch%C3%BAc%20c%C3%A1c%20b%E1%BA%A1n%20nghe%20nh%E1%BA%A1c%20vui%20v%E1%BA%BB&tl=vi&total=1&idx=0&textlen=89&tk=540951.951527&client=webapp&prev=input" allow="autoplay" style="display:none" id="iframeAudio">
+			</iframe>		
+		<% else %>
+			<h1 class="welcome">Welcome to the Sample App</h1> 
+			<p style="margin-left: 355px"><%= link_to "Sign up now!", signup_path, class: "button" %></p>
+		<% end %>
+	</div>
+</body>

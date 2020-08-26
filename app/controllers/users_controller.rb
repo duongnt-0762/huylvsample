@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :logged_in_user, only: [:new]
+	before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
 	before_action :check_logged_in, only: [:new, :create]
 	before_action :find_user, only: [:correct_user, :show, :edit, :update, :destroy]
 	before_action :correct_user, only: [:edit, :update]
@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 	end
 
 	def show 
+		@follow_user = current_user.active_relationships.build
+		@unfollow_user = current_user.active_relationships.find_by(followed_id: @user.id)
 		@microposts = @user.microposts.order_by_time.paginate(page: params[:page])
 	end
 
@@ -46,8 +48,20 @@ class UsersController < ApplicationController
 		redirect_to users_url
 	end
 
-	# Confirms a logged-in user.
-	
+	def following
+		@title = "Following"
+		@user = User.find(params[:id])
+		@users = @user.following.paginate(page: params[:page])
+		render 'show_follow'
+	end
+
+	def followers
+		@title = "Followers"
+		@user = User.find(params[:id])
+		@users = @user.followers.paginate(page: params[:page])
+		render 'show_follow'
+	end
+		
 
 
 	private
